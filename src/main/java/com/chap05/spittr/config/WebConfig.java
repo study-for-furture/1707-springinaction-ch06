@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 /**
  * Created by mitmo on 2017-09-02.
@@ -17,7 +19,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @ComponentScan("com.chap05.spittr")
 public class WebConfig extends WebMvcConfigurerAdapter {
-    @Bean
+/*    @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 
@@ -25,7 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         resolver.setSuffix(".jsp");
         resolver.setExposeContextBeansAsAttributes(true);
         return resolver;
-    }
+    }*/
 
     public void configureDefaultServeletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
@@ -33,7 +35,21 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // TODO Auto-generated method stub
-        super.addResourceHandlers(registry);
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+
+    @Bean
+    public TilesConfigurer tilesConfigurer() {
+        TilesConfigurer tiles = new TilesConfigurer();
+        tiles.setDefinitions(new String[] {
+                "/WEB-INF/layout/tiles.xml"
+        });
+        tiles.setCheckRefresh(true);
+        return tiles;
+    }
+
+    @Bean
+    public ViewResolver viewResolver() {
+        return new TilesViewResolver();
     }
 }

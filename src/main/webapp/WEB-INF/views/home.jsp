@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<html>
+<%--<html>
   <head>
     <title>Spitter</title>
     <link rel="stylesheet"
@@ -13,4 +13,9 @@
     <a href="<c:url value="/spittles" />">Spittles</a> |
     <a href="<c:url value="/spitter/register" />">Register</a>
   </body>
-</html>
+</html>--%>
+
+<h1>Welcome to Spitter</h1>
+
+<a href="<c:url value="/spittles" />">Spittles</a> |
+<a href="<c:url value="/spitter/register" />">Register</a>
